@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc://127.0.0.1:3306/spring_awesome_demo?useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    name: root
+    password: root1234
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCPPool
+      max-lifetime: 600000
+      connection-timeout: 30000
+      data-source-properties:
+        oracle.jdbc.implicitStatementCacheSize: 10
