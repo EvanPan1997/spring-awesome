@@ -10,6 +10,6 @@ public class RequestHandledListener implements ApplicationListener<RequestHandle
 
     @Override
     public void onApplicationEvent(RequestHandledEvent event) {
-        System.out.println("===RequestHandledListener===");
+        System.out.println("Request handled");
     }
 }
