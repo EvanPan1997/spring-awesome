@@ -1,8 +1,10 @@
+server:
+  port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc://127.0.0.1:3306/spring_awesome_demo?useSSL=false&characterEncoding=utf8&serverTimezone=UTC
-    name: root
+    url: jdbc:mysql://127.0.0.1:3306/spring_awesome_demo?useSSL=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
     password: root1234
     hikari:
       minimum-idle: 5
