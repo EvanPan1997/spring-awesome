@@ -1,6 +1,8 @@
 package com.example.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,20 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private String data_id;
-    private String user_id;
+    @TableId
+    private String id;
+    private String userId;
     private String username;
     private String password;
     private String remark;
-    private String data_crt_user;
-    private String data_crt_date;
-    private String data_crt_time;
-    private String data_chg_user;
-    private String data_chg_date;
-    private String data_chg_time;
-    private String data_apv_user;
-    private String data_apv_date;
-    private String data_apv_time;
+    private String createUser;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String createTime;
+    private String updateUser;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String updateTime;
     private String rsv1;
     private String rsv2;
     private String rsv3;

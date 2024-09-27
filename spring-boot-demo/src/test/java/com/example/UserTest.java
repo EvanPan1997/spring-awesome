@@ -16,7 +16,7 @@ public class UserTest {
     @Test
     public void getUserByUserId() {
         try {
-            String userId = "user";
+            String userId = "test";
             User user = userService.getUserByUserId(userId);
             if (user != null) {
                 System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(user));
