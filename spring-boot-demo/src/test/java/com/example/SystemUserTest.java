@@ -1,8 +1,8 @@
 package com.example;
 
-import com.example.mapper.UserMapper;
-import com.example.model.User;
-import com.example.service.UserService;
+import com.example.mapper.SystemUserMapper;
+import com.example.entity.SystemUser;
+import com.example.service.SystemUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,19 +10,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 @SpringBootTest
-public class UserTest {
+public class SystemUserTest {
     @Resource
-    private UserService userService;
+    private SystemUserService systemUserService;
     @Resource
-    private UserMapper userMapper;
+    private SystemUserMapper userMapper;
 
     @Test
     public void getUserByUserId() {
         try {
             String userId = "test1";
-            User user = userService.getUserByUserId(userId);
-            if (user != null) {
-                System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(user));
+            SystemUser systemUser = systemUserService.getUserByUserId(userId);
+            if (systemUser != null) {
+                System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(systemUser));
             } else {
                 System.out.println("User not found");
             }
@@ -33,13 +33,13 @@ public class UserTest {
 
     @Test
     public void insertUser() {
-        User user = new User()
+        SystemUser systemUser = new SystemUser()
                 .setId("test1")
                 .setUserId("test1")
                 .setUsername("test_user1")
                 .setPassword("123")
                 .setCreateUser("system")
                 .setCreateTime("2024-09-27 11:20:00");
-        userMapper.insertOrUpdate(user);
+        userMapper.insertOrUpdate(systemUser);
     }
 }
