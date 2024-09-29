@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.SystemUser;
 import com.example.service.LoginService;
+import com.example.utils.ResponseResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,19 +18,20 @@ public class UserController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody SystemUser systemUser) {
+    public ResponseResult<Object> login(@RequestBody SystemUser systemUser) {
         try {
             Map<String, String> map = loginService.login(systemUser);
-            return ResponseEntity.ok(map);
+            return ResponseResult.success("登录成功", map);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+            return ResponseResult.build(HttpStatus.UNAUTHORIZED.value(), "登录失败", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<String> logout() {
+    public ResponseResult<String> logout() {
         loginService.logout();
-        return ResponseEntity.ok("注销成功");
+        return ResponseResult.success("注销成功");
     }
 }
