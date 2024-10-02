@@ -19,7 +19,7 @@ public class RedisTest {
 
     @Test
     public void commonTest() {
-//        redisTemplate.opsForValue().set("test_name", "111");
+        redisTemplate.opsForValue().set("test_name", "111");
         System.out.println(redisTemplate.opsForValue().get("test_name"));
     }
 
@@ -29,11 +29,9 @@ public class RedisTest {
         try {
             if (lock.tryLock()) {
                 RBucket<Object> bucket = redissonClient.getBucket("redisson_test_str");
-//                String value = (String) bucket.get();
-//                System.out.println(value);
+                System.out.println(bucket.get());
                 bucket.set("222");
-                String value = (String) bucket.get();
-                System.out.println(value);
+                System.out.println(bucket.get());
             } else {
                 System.out.println("lock failed");
             }
