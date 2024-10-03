@@ -4,6 +4,7 @@ import com.example.entity.LoginUser;
 import com.example.entity.SystemUser;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,8 @@ import java.util.Objects;
 public class LoginServiceImpl implements LoginService {
     @Resource
     private AuthenticationManager authenticationManager;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 通过 AuthenticationManager 的 authenticate 方法来进行用户认证，
@@ -41,8 +44,8 @@ public class LoginServiceImpl implements LoginService {
         String jwt = JwtUtils.generateToken(userId);
         Map<String, String> map = new HashMap<>();
         map.put("token", jwt);
-        // TODO 添加到redis
-
+        // 添加到redis
+        redisTemplate.opsForValue().set("login:" + userId, loginUser);
         return map;
     }
 
@@ -56,8 +59,8 @@ public class LoginServiceImpl implements LoginService {
         //获取 SecurityContextHolder 中的 用户id
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-//        String userId = loginUser.getUser().getUserId();
+        String userId = loginUser.getUser().getUserId();
         // 删除 redis 中的值
-//        redisTemplate.delete("login:" + userId);
+        redisTemplate.delete("login:" + userId);
     }
 }
