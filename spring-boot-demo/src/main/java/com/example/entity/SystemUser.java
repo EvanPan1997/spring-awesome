@@ -9,13 +9,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 @TableName("system_user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SystemUser {
+public class SystemUser implements Serializable {
     @TableId
     private String id;
     private String userId;
