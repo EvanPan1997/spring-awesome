@@ -1,6 +1,6 @@
 package com.example.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.handler.JwtAuthenticationTokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +31,9 @@ public class DiscoverSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private AccessDeniedHandler accessDeniedHandler;
+
+    @Resource
+    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,7 +72,7 @@ public class DiscoverSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login", "/test/**").permitAll()
                 .anyRequest().authenticated();
 
-//        http.addFilter(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
