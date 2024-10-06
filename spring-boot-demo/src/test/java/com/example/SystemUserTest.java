@@ -6,6 +6,7 @@ import com.example.service.SystemUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.Resource;
 
@@ -15,6 +16,8 @@ public class SystemUserTest {
     private SystemUserService systemUserService;
     @Resource
     private SystemUserMapper userMapper;
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @Test
     public void getUserByUserId() {
@@ -41,5 +44,12 @@ public class SystemUserTest {
                 .setCreateUser("system")
                 .setCreateTime("2024-09-27 11:20:00");
         userMapper.insertOrUpdate(systemUser);
+    }
+
+    @Test
+    public void encodePassword() {
+        String password = "123";
+        String encoded = passwordEncoder.encode(password);
+        System.out.println(encoded);
     }
 }
