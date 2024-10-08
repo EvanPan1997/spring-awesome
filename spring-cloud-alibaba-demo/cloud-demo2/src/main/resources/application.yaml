@@ -2,7 +2,7 @@ server:
   port: 9002
 spring:
   application:
-    name: cloud-demo2
+    name: cloud-server
   cloud:
     nacos:
       discovery:

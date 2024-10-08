@@ -2,9 +2,9 @@ server:
   port: 9001
 spring:
   application:
-    name: cloud-demo1
+    name: cloud-client
   cloud:
     nacos:
       discovery:
-        ip: 127.0.0.1
-        port: 8848
+#        enabled: false
+        server-addr: 127.0.0.1:8848 # 此处的IP和PORT是在服务列表中的IP和端口
