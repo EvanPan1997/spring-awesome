@@ -6,6 +6,7 @@
     <modules>
         <module>design-mode-demo</module>
         <module>spring-boot-demo</module>
+        <module>spring-cloud-alibaba-demo</module>
     </modules>
 
     <parent>
