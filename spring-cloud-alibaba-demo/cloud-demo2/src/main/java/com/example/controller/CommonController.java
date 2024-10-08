@@ -12,7 +12,7 @@ public class CommonController {
     @GetMapping("/process/{msg}")
     public String process(@PathVariable("msg") String msg)
     {
-        log.info("get request");
+        log.info("server get request, msg: " + msg);
         return "process [" + msg + "] finished";
     }
 }
