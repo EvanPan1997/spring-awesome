@@ -1,22 +1,19 @@
 package com.example.config;
 
 import com.example.handler.JwtAuthenticationTokenFilter;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.annotation.Resource;
 
 /**
  * SpringSecurity 配置类
@@ -24,8 +21,7 @@ import javax.annotation.Resource;
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class DiscoverSecurityConfig extends WebSecurityConfigurerAdapter {
+public class DiscoverSecurityConfig {
     @Resource
     private AuthenticationEntryPoint authenticationEntryPoint;
 
@@ -40,44 +36,56 @@ public class DiscoverSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler).and()
+                .authorizeHttpRequests()
+                .requestMatchers("/user/login", "/test/**", "/resources/**", "/static/**", "/public/**").permitAll()
+                .anyRequest().authenticated().and()
+        .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+
     /**
      * 认证管理
      */
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
     /**
      * 核心过滤器
      * */
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/resources/**")
-                .antMatchers("/static/**")
-                .antMatchers("/public/**");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring()
+//                .antMatchers("/resources/**")
+//                .antMatchers("/static/**")
+//                .antMatchers("/public/**");
+//    }
 
     /**
      * 安全过滤器
      */
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .antMatchers("/user/login", "/test/**").permitAll()
-                .anyRequest().authenticated();
-
-        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .accessDeniedHandler(accessDeniedHandler);
-
-        http.cors();
-    }
+//    @Override
+//    public void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeHttpRequests()
+//                .antMatchers("/user/login", "/test/**").permitAll()
+//                .anyRequest().authenticated();
+//
+//        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        http.exceptionHandling()
+//                .authenticationEntryPoint(authenticationEntryPoint)
+//                .accessDeniedHandler(accessDeniedHandler);
+//
+//        http.cors();
+//    }
 }

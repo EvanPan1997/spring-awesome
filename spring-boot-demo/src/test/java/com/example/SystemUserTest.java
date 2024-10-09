@@ -2,13 +2,12 @@ package com.example;
 
 import com.example.mapper.SystemUserMapper;
 import com.example.entity.SystemUser;
-import com.example.service.SystemUserService;
+import com.example.feign.SystemUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.annotation.Resource;
 
 @SpringBootTest
 public class SystemUserTest {

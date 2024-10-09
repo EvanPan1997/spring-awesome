@@ -2,10 +2,9 @@ package com.example.impl;
 
 import com.example.mapper.SystemUserMapper;
 import com.example.entity.SystemUser;
-import com.example.service.SystemUserService;
+import com.example.feign.SystemUserService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 @Service
 public class SystemUserServiceImpl implements SystemUserService {

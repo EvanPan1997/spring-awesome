@@ -2,8 +2,9 @@ package com.example.impl;
 
 import com.example.entity.LoginUser;
 import com.example.entity.SystemUser;
-import com.example.service.LoginService;
+import com.example.feign.LoginService;
 import com.example.utils.JwtUtils;
+import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

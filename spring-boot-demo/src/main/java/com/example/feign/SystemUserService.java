@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.feign;
 
 import com.example.entity.SystemUser;
 

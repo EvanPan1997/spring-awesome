@@ -1,14 +1,12 @@
 package com.example.controller;
 
 import com.example.entity.SystemUser;
-import com.example.service.LoginService;
+import com.example.feign.LoginService;
 import com.example.utils.ResponseResult;
-import org.springframework.beans.BeanUtils;
+import jakarta.annotation.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @RestController

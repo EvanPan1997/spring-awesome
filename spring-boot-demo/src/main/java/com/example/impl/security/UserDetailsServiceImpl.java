@@ -2,13 +2,13 @@ package com.example.impl.security;
 
 import com.example.entity.LoginUser;
 import com.example.entity.SystemUser;
-import com.example.service.SystemUserService;
+import com.example.feign.SystemUserService;
+import jakarta.annotation.Resource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
