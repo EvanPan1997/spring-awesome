@@ -6,5 +6,4 @@ spring:
   cloud:
     nacos:
       discovery:
-#        enabled: false
         server-addr: 127.0.0.1:8848 # 此处的IP和PORT是在服务列表中的IP和端口
