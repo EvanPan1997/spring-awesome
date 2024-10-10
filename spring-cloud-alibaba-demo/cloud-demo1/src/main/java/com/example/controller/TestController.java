@@ -1,11 +1,9 @@
 package com.example.controller;
 
-import com.example.feign.CloudFeign;
 import com.example.service.TestService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RestController
