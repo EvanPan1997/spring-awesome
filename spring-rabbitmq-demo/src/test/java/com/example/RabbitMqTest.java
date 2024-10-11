@@ -12,6 +12,9 @@ import java.util.concurrent.TimeoutException;
 @SpringBootTest
 public class RabbitMqTest {
 
+    /**
+     * 创建不建议重复使用
+     * */
     @Test
     public void create() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
