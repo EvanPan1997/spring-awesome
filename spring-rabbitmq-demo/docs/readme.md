@@ -56,3 +56,158 @@ rabbitmqctl set_permissions -p / ".*" ".*" ".*" #用于配置用户在特定虚�
 ```shell
 rabbitmqctl set_permissions -p / myuser "myqueue" "myqueue" "myqueue"
 ```
+
+# SpringBoot项目中集成RabbitMQ
+
+本文档依赖JDK版本为`17`, Spring版本为`3.0.2`
+
+### 引入依赖
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+```
+
+### Provider代码
+```java
+import com.example.entity.MsgEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MessageProviderService {
+
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public void sendMessage(MsgEntity entity) throws JsonProcessingException {
+        String json = objectMapper.writeValueAsString(entity);
+        rabbitTemplate.convertAndSend("testQueue", json);
+    }
+}
+```
+
+### Consumer代码
+
+```java
+import com.example.entity.MsgEntity;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MessageConsumerService {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    
+    @RabbitListener(queues = "testQueue")
+    public void receiveMessage(final String msg) {
+        MsgEntity entity = objectMapper.readValue(msg, MsgEntity.class);
+        /* 处理entity的逻辑 */
+    }
+}
+```
+
+# SpringBoot项目集成RabbitMQ并开启手动确认机制
+
+由于本demo使用的SpringBoot版本为`3.0.2`并依赖Spring的版本依赖管理, 所以不能只能使用修改配置文件的方法来开启手动确认模式
+
+### RabbitMQConfig
+
+```java
+import lombok.Data;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Data
+@Configuration
+@ConfigurationProperties(prefix = "spring.rabbitmq")
+public class RabbitMQConfig {
+    private String host;
+    private int port;
+    private String username;
+    private String password;
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        CachingConnectionFactory factory = new CachingConnectionFactory();
+        factory.setHost(host);
+        factory.setPort(port);
+        factory.setUsername(username);
+        factory.setPassword(password);
+        return factory;
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory factory) {
+        return new RabbitTemplate(factory);
+    }
+}
+```
+
+### RabbitListenerConfiguration
+
+```java
+import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RabbitListenerConfiguration {
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        return factory;
+    }
+}
+```
+
+### Consumer
+
+```java
+import com.example.entity.MsgEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rabbitmq.client.Channel;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+
+@Service
+public class MessageConsumerService {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @RabbitListener(queues = "testQueue", containerFactory = "simpleRabbitListenerContainerFactory")
+    public void receiveMessage(final Message message, Channel channel) throws IOException {
+        long deliveryTag = message.getMessageProperties().getDeliveryTag();
+        try {
+            byte[] body = message.getBody();
+            MsgEntity entity = objectMapper.readValue(body, MsgEntity.class);
+            /* 此处写具体处理逻辑 */
+            // 确认消息
+            channel.basicAck(deliveryTag, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 异常打回死信队列
+            channel.basicNack(deliveryTag, false, true);
+        }
+    }
+}
+```

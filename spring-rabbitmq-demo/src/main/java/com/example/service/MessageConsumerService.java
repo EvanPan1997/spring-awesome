@@ -10,7 +10,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 @Slf4j
 @Service
@@ -19,7 +18,7 @@ public class MessageConsumerService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @RabbitListener(queues = "testQueue", containerFactory = "simpleRabbitListenerContainerFactory")
-    public void receiveMessage(final Message message, Channel channel) throws IOException, TimeoutException {
+    public void receiveMessage(final Message message, Channel channel) throws IOException {
         log.info("listener process start");
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try {
