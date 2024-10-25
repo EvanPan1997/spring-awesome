@@ -9,6 +9,7 @@
         <module>spring-cloud-alibaba-demo</module>
         <module>spring-rabbitmq-demo</module>
         <module>spring-zookeeper-kafka-demo</module>
+        <module>spring-sentinel-core-demo</module>
     </modules>
 
     <parent>
