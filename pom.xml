@@ -10,6 +10,7 @@
         <module>spring-rabbitmq-demo</module>
         <module>spring-zookeeper-kafka-demo</module>
         <module>spring-sentinel-core-demo</module>
+        <module>spring-cloud-gateway-demo</module>
     </modules>
 
     <parent>
