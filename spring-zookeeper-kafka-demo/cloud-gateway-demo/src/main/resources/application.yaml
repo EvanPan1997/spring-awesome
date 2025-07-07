@@ -1,4 +1,6 @@
-#spring:
-#  cloud:
+spring:
+  cloud:
 #    gateway:
 #      routes:
+    zookeeper:
+      connect-string: localhost:2181

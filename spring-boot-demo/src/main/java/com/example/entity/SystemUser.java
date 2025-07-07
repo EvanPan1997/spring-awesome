@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SystemUser implements Serializable {
-    @TableId
+    @TableId(value = "id")
     private String id;
     private String userId;
     private String username;

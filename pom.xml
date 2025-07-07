@@ -11,12 +11,14 @@
         <module>spring-zookeeper-kafka-demo</module>
         <module>spring-sentinel-core-demo</module>
         <module>spring-cloud-gateway-demo</module>
+        <module>spring-boot-redis-demo</module>
+        <module>spring-boot-data-demo</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
+        <version>3.3.10</version>
     </parent>
 
     <name>SpringAwesome</name>
