@@ -100,7 +100,7 @@ public class EmbeddedTestDemo {
             embeddedTest.setTableName("test-" + i);
             embeddedTest.setValueA("AAA-" + i);
             embeddedTest.setValueB("BBB-" + i);
-            embeddedTest.setValueB("CCC-" + i);
+            embeddedTest.setValueC("CCC-" + i);
             list.add(embeddedTest);
         }
         return list;
