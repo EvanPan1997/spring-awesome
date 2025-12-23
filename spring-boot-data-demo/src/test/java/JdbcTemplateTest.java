@@ -1,4 +1,3 @@
-import cn.hutool.json.JSONObject;
 import com.example.Main;
 import com.example.entity.EmbeddedTest;
 import jakarta.annotation.Resource;
@@ -24,25 +23,24 @@ public class JdbcTemplateTest {
     private JdbcTemplate jdbcTemplate;
 
     private static final String sql = "select * from embedded_test";
-
+    private static final RowMapper<EmbeddedTest> embeddedTestRowMapper = new RowMapper<>() {
+        @Nullable
+        @Override
+        public EmbeddedTest mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return EmbeddedTest.builder()
+                    .versionId(rs.getString("version_id"))
+                    .tableId(rs.getLong("table_id"))
+                    .tableSchema(rs.getString("table_schema"))
+                    .tableName(rs.getString("table_name"))
+                    .valueA(rs.getString("value_a"))
+                    .valueB(rs.getString("value_b"))
+                    .valueC(rs.getString("value_c"))
+                    .build();
+        }
+    };
     @Test
     public void queryForStreamTest() {
-        RowMapper<EmbeddedTest> rowMapper = new RowMapper<>() {
-            @Nullable
-            @Override
-            public EmbeddedTest mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return EmbeddedTest.builder()
-                        .versionId(rs.getString("version_id"))
-                        .tableId(rs.getLong("table_id"))
-                        .tableSchema(rs.getString("table_schema"))
-                        .tableName(rs.getString("table_name"))
-                        .valueA(rs.getString("value_a"))
-                        .valueB(rs.getString("value_b"))
-                        .valueC(rs.getString("value_c"))
-                        .build();
-            }
-        };
-        try (Stream<EmbeddedTest> stream = jdbcTemplate.queryForStream(sql, rowMapper)){
+        try (Stream<EmbeddedTest> stream = jdbcTemplate.queryForStream(sql, embeddedTestRowMapper)){
             Iterator<EmbeddedTest> iterator = stream.iterator();
             while (iterator.hasNext()) {
                 EmbeddedTest embeddedTest = iterator.next();
@@ -57,40 +55,41 @@ public class JdbcTemplateTest {
         jdbcTemplate.execute(new ConnectionCallback<EmbeddedTest>() {
             @Override
             public EmbeddedTest doInConnection(Connection con) throws SQLException, DataAccessException {
-                ResultSetExtractor<EmbeddedTest> rse = new ResultSetExtractor<EmbeddedTest>() {
-                    @Override
-                    public EmbeddedTest extractData(ResultSet rs) throws SQLException, DataAccessException {
-                        ResultSetMetaData resultSetMetaData = rs.getMetaData();// 该表数据结构
-                        while (rs.next()) {
-                            // 处理每条数据
-                            System.out.println(new JSONObject(rs));
-                        }
-                        return new JSONObject(rs).toBean(EmbeddedTest.class);
+                ResultSetExtractor<EmbeddedTest> rse = rs -> {
+                    ResultSetMetaData resultSetMetaData = rs.getMetaData();// 该表数据结构
+                    int columnCount = resultSetMetaData.getColumnCount();
+                    for (int i = 1; i <= columnCount; i++) {
+                        System.out.println(resultSetMetaData.getColumnName(i));
                     }
-                };
-                PreparedStatement ps = null;
-                try {
 
-                    ResultSet rs = null;
-                    try {
-                        // 设置只能往后并且只读
-                        ps = con.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-                        return rse.extractData(rs);
-                    } catch (Exception e) {
-                        log.error(e.getMessage(), e);
-                        throw new RuntimeException(e.getMessage(), e);
-                    } finally {
-                        if (rs != null) {
-                            rs.close();
-                        }
+                    while (rs.next()) {
+                        // 处理每条数据
+//                        System.out.println(rs.getString(1));
                     }
-                } finally {
-                    if (ps != null) {
-                        ps.close();
-                    }
+                    return null;
+                };
+                // 初始化为 null
+                try (PreparedStatement ps = con.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY); ResultSet rs = ps.executeQuery()) {
+                    // 设置只能往后并且只读
+                    // 执行查询并获取 ResultSet
+                    return rse.extractData(rs);
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                    throw new RuntimeException(e.getMessage(), e);
                 }
             }
         });
 
     }
+
+    @Test
+    public void testMethod() {
+        Stream<EmbeddedTest> embeddedTestStream = jdbcTemplate.queryForStream(sql, embeddedTestRowMapper);
+        System.out.println(embeddedTestStream.toList().size());
+    }
+
+    private void executeMethod() {
+
+    }
+
 }
