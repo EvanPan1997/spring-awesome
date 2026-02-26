@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-alibaba-demo/cloud-demo1/cloud-demo1.iml" filepath="$PROJECT_DIR$/spring-cloud-alibaba-demo/cloud-demo1/cloud-demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-alibaba-demo/cloud-demo2/cloud-demo2.iml" filepath="$PROJECT_DIR$/spring-cloud-alibaba-demo/cloud-demo2/cloud-demo2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-zookeeper-kafka-demo/cloud-gateway-demo/cloud-gateway-demo.iml" filepath="$PROJECT_DIR$/spring-zookeeper-kafka-demo/cloud-gateway-demo/cloud-gateway-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-gateway-demo/gateway/gateway.iml" filepath="$PROJECT_DIR$/spring-cloud-gateway-demo/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-demo/spring-boot-demo.iml" filepath="$PROJECT_DIR$/spring-boot-demo/spring-boot-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-redis-demo/spring-boot-redis-demo.iml" filepath="$PROJECT_DIR$/spring-boot-redis-demo/spring-boot-redis-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-alibaba-demo/spring-cloud-alibaba-demo.iml" filepath="$PROJECT_DIR$/spring-cloud-alibaba-demo/spring-cloud-alibaba-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-rabbitmq-demo/spring-rabbitmq-demo.iml" filepath="$PROJECT_DIR$/spring-rabbitmq-demo/spring-rabbitmq-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-zookeeper-kafka-demo/spring-zookeeper-kafka-demo.iml" filepath="$PROJECT_DIR$/spring-zookeeper-kafka-demo/spring-zookeeper-kafka-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-gateway-demo/test-service/test-service.iml" filepath="$PROJECT_DIR$/spring-cloud-gateway-demo/test-service/test-service.iml" />
+    </modules>
+  </component>
+</project>

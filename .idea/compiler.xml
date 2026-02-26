@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-boot-data-demo" />
+        <module name="test-service" />
+        <module name="spring-sentinel-core-demo" />
+        <module name="spring-rabbitmq-demo" />
+        <module name="spring-boot-demo" />
+        <module name="spring-dubbo-demo" />
+        <module name="spring-boot-redis-demo" />
+        <module name="design-mode-demo" />
+        <module name="spring-boot-mp-demo" />
+        <module name="cloud-demo1" />
+        <module name="cloud-demo2" />
+        <module name="cloud-gateway-demo" />
+        <module name="gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="baidu-test" target="17" />
+      <module name="DesignModeDemo" target="11" />
+      <module name="spring-boot-zookeeper-kafka-demo" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DesignModeDemo" options="-parameters" />
+      <module name="baidu-test" options="-parameters" />
+      <module name="cloud-demo1" options="-parameters" />
+      <module name="cloud-demo2" options="-parameters" />
+      <module name="cloud-gateway-demo" options="-parameters" />
+      <module name="design-mode-demo" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="spring-boot-data-demo" options="-parameters" />
+      <module name="spring-boot-demo" options="-parameters" />
+      <module name="spring-boot-mp-demo" options="-parameters" />
+      <module name="spring-boot-redis-demo" options="-parameters" />
+      <module name="spring-boot-zookeeper-kafka-demo" options="-parameters" />
+      <module name="spring-cloud-alibaba-demo" options="" />
+      <module name="spring-cloud-gateway-demo" options="" />
+      <module name="spring-dubbo-demo" options="-parameters" />
+      <module name="spring-rabbitmq-demo" options="-parameters" />
+      <module name="spring-sentinel-core-demo" options="-parameters" />
+      <module name="spring-zookeeper-kafka-demo" options="" />
+      <module name="test-service" options="-parameters" />
+    </option>
+  </component>
+</project>
