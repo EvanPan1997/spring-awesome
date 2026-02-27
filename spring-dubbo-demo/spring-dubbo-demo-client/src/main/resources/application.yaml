@@ -1,0 +1,15 @@
+server:
+  port: 8080
+# Dubbo direct reference URL (for direct path; can switch to registry later)
+dubbo:
+  application:
+    qos-enable: false
+  reference:
+    url:
+      greeting: dubbo://127.0.0.1:20880
+
+# REST consumer base URL (for HTTP calls to server REST endpoints)
+rest:
+  server:
+    base:
+      url: http://127.0.0.1:8090

@@ -1,0 +1,14 @@
+server:
+  port: 8090
+# Dubbo server config for direct (no registry) usage in this simplified scenario
+dubbo:
+  application:
+    qos-enable: false
+
+spring:
+  dubbo:
+    protocol:
+      name: dubbo
+      port: 20880
+    scan:
+      base-packages: com.example.server
