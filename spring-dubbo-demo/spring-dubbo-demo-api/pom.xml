@@ -4,16 +4,10 @@
 
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>spring-awesome</artifactId>
+        <artifactId>spring-dubbo-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-dubbo-demo</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>spring-dubbo-demo-api</module>
-        <module>spring-dubbo-demo-server</module>
-        <module>spring-dubbo-demo-client</module>
-    </modules>
+    <artifactId>spring-dubbo-demo-api</artifactId>
+    <packaging>jar</packaging>
 </project>

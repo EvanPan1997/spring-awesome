@@ -8,14 +8,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spring-boot-data-demo" />
+        <module name="spring-dubbo-demo-client" />
         <module name="test-service" />
         <module name="spring-sentinel-core-demo" />
+        <module name="spring-dubbo-demo-server" />
         <module name="spring-rabbitmq-demo" />
         <module name="spring-boot-demo" />
-        <module name="spring-dubbo-demo" />
         <module name="spring-boot-redis-demo" />
         <module name="design-mode-demo" />
         <module name="spring-boot-mp-demo" />
+        <module name="spring-dubbo-demo-api" />
         <module name="cloud-demo1" />
         <module name="cloud-demo2" />
         <module name="cloud-gateway-demo" />
@@ -44,7 +46,10 @@
       <module name="spring-boot-zookeeper-kafka-demo" options="-parameters" />
       <module name="spring-cloud-alibaba-demo" options="" />
       <module name="spring-cloud-gateway-demo" options="" />
-      <module name="spring-dubbo-demo" options="-parameters" />
+      <module name="spring-dubbo-demo" options="" />
+      <module name="spring-dubbo-demo-api" options="-parameters" />
+      <module name="spring-dubbo-demo-client" options="-parameters" />
+      <module name="spring-dubbo-demo-server" options="-parameters" />
       <module name="spring-rabbitmq-demo" options="-parameters" />
       <module name="spring-sentinel-core-demo" options="-parameters" />
       <module name="spring-zookeeper-kafka-demo" options="" />
