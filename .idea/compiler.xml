@@ -14,6 +14,7 @@
         <module name="spring-dubbo-demo-server" />
         <module name="spring-rabbitmq-demo" />
         <module name="spring-boot-demo" />
+        <module name="spring-ai-demo" />
         <module name="spring-boot-redis-demo" />
         <module name="design-mode-demo" />
         <module name="spring-boot-mp-demo" />
@@ -39,6 +40,7 @@
       <module name="cloud-gateway-demo" options="-parameters" />
       <module name="design-mode-demo" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="spring-ai-demo" options="-parameters" />
       <module name="spring-boot-data-demo" options="-parameters" />
       <module name="spring-boot-demo" options="-parameters" />
       <module name="spring-boot-mp-demo" options="-parameters" />

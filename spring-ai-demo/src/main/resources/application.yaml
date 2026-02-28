@@ -1,0 +1,10 @@
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434 # Ollama 服务地址
+      # 可选：配置模型不存在时自动拉取 (需要 Spring AI 1.0.0 以上版本)
+      init:
+        pull-model-strategy: never
+      chat:
+        options:
+          model: deepseek-r1:8b # 或你拉取的其他模型，如 deepseek-r1, mistral 等

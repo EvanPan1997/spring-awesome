@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-ai-demo.iml" filepath="$PROJECT_DIR$/spring-ai-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-dubbo-demo/spring-dubbo-demo.iml" filepath="$PROJECT_DIR$/spring-dubbo-demo/spring-dubbo-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-dubbo-demo/spring-dubbo-demo-client/spring-dubbo-demo-client.iml" filepath="$PROJECT_DIR$/spring-dubbo-demo/spring-dubbo-demo-client/spring-dubbo-demo-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-dubbo-demo/spring-dubbo-demo-server/spring-dubbo-demo-server.iml" filepath="$PROJECT_DIR$/spring-dubbo-demo/spring-dubbo-demo-server/spring-dubbo-demo-server.iml" />
