@@ -1,4 +1,4 @@
-package com.example.chat.service;
+package com.example.chat;
 
 import jakarta.annotation.Resource;
 import org.springframework.ai.chat.client.ChatClient;

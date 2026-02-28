@@ -24,6 +24,10 @@
         </dependency>
 
         <!-- AI框架 相关依赖 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-client-chat</artifactId>
+        </dependency>
         <!-- 本地 ollama -->
         <dependency>
             <groupId>org.springframework.ai</groupId>

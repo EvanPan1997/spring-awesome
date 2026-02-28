@@ -1,6 +1,5 @@
-package com.example.chat.controller;
+package com.example.chat;
 
-import com.example.chat.service.ChatService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

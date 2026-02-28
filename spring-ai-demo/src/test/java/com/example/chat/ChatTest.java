@@ -1,6 +1,5 @@
 package com.example.chat;
 
-import com.example.chat.controller.ChatController;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
