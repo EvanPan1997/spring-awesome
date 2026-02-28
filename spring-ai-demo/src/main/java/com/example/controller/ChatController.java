@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -24,7 +25,7 @@ public class ChatController {
 
     // 如果需要流式响应
     @PostMapping(value = "/stream", produces = "text/event-stream")
-    public reactor.core.publisher.Flux<String> streamChat(@RequestBody String message) {
+    public Flux<String> streamChat(@RequestBody String message) {
         return chatClient.prompt()
                 .user(message)
                 .stream()
