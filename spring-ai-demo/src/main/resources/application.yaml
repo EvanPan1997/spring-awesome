@@ -8,3 +8,11 @@ spring:
       chat:
         options:
           model: deepseek-r1:8b # 或你拉取的其他模型，如 deepseek-r1, mistral 等
+
+langchain4j:
+  ollama:
+    chat-model:
+      base-url: "http://localhost:11434"
+      model-name: "deepseek-r1:8b"  # 或 qwen3:8b 等你本地部署的模型
+      log-requests: true
+      log-responses: true
